@@ -46,3 +46,59 @@ document.addEventListener('keydown', (e) => {
 window.addEventListener('load', () => {
   document.body.classList.add('loaded');
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+  // 设备检测函数
+  function getDeviceType() {
+    const width = window.innerWidth;
+    if (width <= 768) return 'mobile';  // 手机
+    if (width <= 1024) return 'tablet'; // 平板
+    return 'desktop';                   // PC
+  }
+
+  // 设备专用API配置
+  const bgAPIs = {
+    mobile: 'https://uapis.cn/api/imgapi/furry/imgs4k.php',
+    tablet: 'https://uapis.cn/api/imgapi/furry/szs8k.php',
+    desktop: 'https://source.unsplash.com/random/3840x2160/?nature' // PC备用
+  };
+
+  // 设置背景图（带加载状态检测）
+  function setBackground() {
+    const device = getDeviceType();
+    const loadingOverlay = document.createElement('div');
+    loadingOverlay.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--board-color);
+      z-index: -2;
+      transition: opacity 1s;
+    `;
+    document.body.appendChild(loadingOverlay);
+
+    const img = new Image();
+    img.src = bgAPIs[device] + (device === 'mobile' ? '?t=' + Date.now() : ''); // 手机端禁用缓存
+    img.onload = function() {
+      document.body.style.backgroundImage = `url(${img.src})`;
+      setTimeout(() => loadingOverlay.style.opacity = '0', 100);
+      setTimeout(() => loadingOverlay.remove(), 1100);
+    };
+    img.onerror = function() {
+      console.error('背景图加载失败，使用备用API');
+      img.src = bgAPIs.desktop;
+    };
+  }
+
+  // 初始化 + 窗口变化监听
+  setBackground();
+  window.addEventListener('resize', () => {
+    if (window.innerWidth !== lastWidth) {
+      lastWidth = window.innerWidth;
+      setBackground();
+    }
+  });
+});
+
