@@ -87,3 +87,88 @@ body::before {
 body.loaded::before {
   opacity: 0;
 }
+
+/* ===== 全局控制变量 ===== */
+:root {
+  --glass-blur: 12px; /* 主内容模糊度 */
+  --toc-blur: 12px;   /* 目录模糊度 */
+  --mobile-blur: 8px; /* 移动端模糊度 */
+}
+
+/* ============== 核心毛玻璃效果 ============== */
+#board {
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+  backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  padding: 20px;
+  margin: 15px auto;
+}
+
+/* 暗色模式适配 */
+[data-user-color-scheme='dark'] #board {
+  background: rgba(30, 30, 40, 0.4) !important;
+}
+
+/* ============== 目录样式优化 ============== */
+#toc {
+  -webkit-backdrop-filter: blur(var(--toc-blur));
+  backdrop-filter: blur(var(--toc-blur));
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-radius: 12px;
+  padding: 15px;
+  top: 6rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+[data-user-color-scheme='dark'] #toc {
+  background: rgba(40, 40, 55, 0.4) !important;
+}
+
+/* ============== 移动端优化 ============== */
+@media (max-width: 768px) {
+  #board {
+    --glass-blur: var(--mobile-blur);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    margin: 8px;
+    padding: 15px;
+    border-radius: 12px;
+  }
+  
+  #toc {
+    -webkit-backdrop-filter: blur(var(--mobile-blur));
+    backdrop-filter: blur(var(--mobile-blur));
+    position: relative !important;
+    top: 0 !important;
+    margin-top: 20px;
+    width: 100%;
+  }
+  
+  /* 修复移动端键盘弹出问题 */
+  body {
+    background-attachment: scroll !important;
+  }
+}
+
+/* ============== 平板优化 ============== */
+@media (min-width: 769px) and (max-width: 1024px) {
+  #board {
+    max-width: 95%;
+  }
+}
+
+/* ============== 代码块优化 ============== */
+.highlight {
+  background: rgba(0, 0, 0, 0.2) !important;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+/* ============== 背景图全局设置 ============== */
+body {
+  background-size: cover !important;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
