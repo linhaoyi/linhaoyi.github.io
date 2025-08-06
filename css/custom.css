@@ -19,6 +19,13 @@
     opacity: 1;
 }
 
+/* 全屏随机背景图 */
+body {
+  background: url(https://uapis.cn/api/imgapi/furry/img4k.php) no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+}
+
 /* 背景样式 */
 body {
     background-size: cover;
@@ -30,13 +37,6 @@ body {
 
 @keyframes spin {
     to { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-/* 全屏随机背景图 */
-body {
-  background: url(https://uapis.cn/api/imgapi/furry/img4k.php) no-repeat center center fixed;
-  background-size: cover;
-  min-height: 100vh;
 }
 
 /* 调整文章区域边距 */

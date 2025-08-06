@@ -81,20 +81,18 @@ window.addEventListener('load', () => {
 
 // 设备自适应背景加载
 document.addEventListener('DOMContentLoaded', function() {
-  // 设备检测函数
-  function getDeviceType() {
-    const width = window.innerWidth;
-    if (width <= 768) return 'mobile';
-    if (width <= 1024) return 'tablet';
-    return 'desktop';
-  }
 
-  // 设备专用API配置
-  const bgAPIs = {
-    mobile: 'https://uapis.cn/api/imgapi/furry/imgs4k.php',
-    tablet: 'https://uapis.cn/api/imgapi/furry/szs8k.php',
-    desktop: 'https://source.unsplash.com/random/3840x2160/?nature'
-  };
+function getDeviceType() {
+  const width = window.innerWidth;
+  // 更精确的设备判断
+  if (width <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    return 'mobile';
+  }
+  if (width <= 1024) {
+    return 'tablet';
+  }
+  return 'desktop';
+}
 
   // 添加移动端修复
       if (device === 'mobile') {
@@ -166,22 +164,3 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
-  // 移动端菜单关闭按钮
-  const closeMenu = document.createElement('button');
-  closeMenu.innerHTML = '×';
-  closeMenu.style.cssText = `
-    position: absolute;
-    top: 15px;
-    right: 60px;
-    font-size: 2rem;
-    background: transparent;
-    border: none;
-    color: white;
-    z-index: 1001;
-  `;
-  closeMenu.addEventListener('click', () => {
-    document.querySelector('.navbar-toggler').click();
-  });
-  
-  document.querySelector('.navbar-collapse')?.appendChild(closeMenu);
-});
