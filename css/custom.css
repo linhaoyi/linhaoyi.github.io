@@ -39,16 +39,6 @@ body {
   min-height: 100vh;
 }
 
-/* 文章内容毛玻璃效果 */
-.main-content {
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
 /* 调整文章区域边距 */
 .container {
   margin-top: 2rem;
@@ -171,5 +161,151 @@ body {
   background-size: cover !important;
   background-attachment: fixed;
   min-height: 100vh;
+}
+
+/* ============== 修复移动端布局 ============== */
+@media (max-width: 768px) {
+  /* 恢复 Fluid 主题的移动端布局结构 */
+  body, html {
+    height: auto !important;
+    overflow-x: hidden;
+  }
+  
+  #board {
+    display: block !important;
+    margin: 0;
+    padding: 15px 10px;
+    border-radius: 0;
+    min-height: auto;
+  }
+
+  /* 分离首页和文章区 */
+  .index .row {
+    display: block;
+  }
+  
+  .post .row {
+    flex-direction: column;
+  }
+  
+  /* 确保内容区在目录上方 */
+  .post-content {
+    order: 2;
+    margin-top: 20px;
+  }
+  
+  /* 移动端目录样式 */
+  #toc {
+    position: relative !important;
+    top: 0 !important;
+    width: 100% !important;
+    margin-top: 20px;
+    order: 1;
+    max-height: none;
+  }
+  
+  /* 修复首页头图区域 */
+  .banner {
+    height: auto !important;
+    min-height: 40vh;
+  }
+  
+  /* 修复导航栏 */
+  .navbar {
+    position: relative !important;
+  }
+}
+
+/* ============== 修复背景滚动问题 ============== */
+/* 移动端背景解决方案 */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll !important;
+    background-size: cover !important;
+    position: relative;
+    overflow-x: hidden;
+  }
+  
+  body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: inherit;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+    transform: translateZ(0);
+  }
+}
+
+/* ============== 修复导航栏固定问题 ============== */
+@media (max-width: 768px) {
+  .navbar {
+    position: fixed !important;  /* 恢复固定定位 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;  /* 确保高于其他元素 */
+    transition: transform 0.3s ease;
+  }
+  
+  /* 内容区域顶部留白 */
+  #board {
+    padding-top: 60px !important;  /* 导航栏高度补偿 */
+  }
+  
+  /* 汉堡菜单样式优化 */
+  .navbar-toggler {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    z-index: 1001;
+  }
+  
+  /* 菜单展开时全屏覆盖 */
+  .navbar-collapse {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(17, 253, 222, 0.438);
+    bottom: 0;
+    z-index: 1000;
+    padding: 60px 20px 20px;
+    overflow-y: auto;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .navbar-collapse.show {
+    transform: translateY(0);
+  }
+}
+
+/* 桌面端保留固定背景 */
+@media (min-width: 769px) {
+  body {
+    background-attachment: fixed !important;
+  }
+}
+
+/* 添加背景加载动画 */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--board-color);
+  z-index: -1;
+  transition: opacity 0.5s ease;
+}
+
+body.loaded::before {
+  opacity: 0;
 }
 
