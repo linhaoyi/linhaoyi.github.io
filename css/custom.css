@@ -1,27 +1,8 @@
-/* 加载动画 */
-.loading-indicator {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    width: 40px;
-    height: 40px;
-    border: 3px solid rgba(255,255,255,0.3);
-    border-top-color: #fff;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    opacity: 0;
-    transition: opacity 0.3s;
-    z-index: 1000;
-    transform: translate(-50%, -50%);
-}
-
-.loading-indicator.active {
-    opacity: 1;
-}
+/* 删除所有背景切换相关样式和加载动画 */
 
 /* 全屏随机背景图 */
 body {
-  background: url(https://uapis.cn/api/imgapi/furry/img4k.php) no-repeat center center fixed;
+  background: url(https://source.unsplash.com/random/1920x1080) no-repeat center center fixed;
   background-size: cover;
   min-height: 100vh;
 }
@@ -33,10 +14,6 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     transition: background-image 0.5s ease;
-}
-
-@keyframes spin {
-    to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 /* 调整文章区域边距 */
@@ -60,22 +37,6 @@ body {
     margin: 10px;
     padding: 15px;
   }
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--background-color);
-  z-index: -1;
-  transition: opacity 0.5s ease;
-}
-
-body.loaded::before {
-  opacity: 0;
 }
 
 /* ===== 全局控制变量 ===== */
@@ -244,17 +205,17 @@ body {
 /* ============== 修复导航栏固定问题 ============== */
 @media (max-width: 768px) {
   .navbar {
-    position: fixed !important;  /* 恢复固定定位 */
+    position: fixed !important;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1000;  /* 确保高于其他元素 */
+    z-index: 1000;
     transition: transform 0.3s ease;
   }
   
   /* 内容区域顶部留白 */
   #board {
-    padding-top: 60px !important;  /* 导航栏高度补偿 */
+    padding-top: 60px !important;
   }
   
   /* 汉堡菜单样式优化 */
@@ -292,7 +253,7 @@ body {
   }
 }
 
-/* 添加背景加载动画 */
+/* 简单的加载过渡 */
 body::before {
   content: "";
   position: fixed;
@@ -302,10 +263,9 @@ body::before {
   height: 100%;
   background: var(--board-color);
   z-index: -1;
-  transition: opacity 0.5s ease;
+  transition: opacity 1s ease;
 }
 
 body.loaded::before {
   opacity: 0;
 }
-
