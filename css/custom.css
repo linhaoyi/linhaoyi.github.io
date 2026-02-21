@@ -253,7 +253,7 @@ body {
   }
 }
 
-/* 简单的加载过渡 */
+/* 加载过渡 */
 body::before {
   content: "";
   position: fixed;
