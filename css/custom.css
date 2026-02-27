@@ -1,52 +1,18 @@
-/* 删除所有背景切换相关样式和加载动画 */
-
-/* 全屏随机背景图 */
+/* 无任何 background-image 预设 */
 body {
-  background: url(https://source.unsplash.com/random/1920x1080) no-repeat center center fixed;
-  background-size: cover;
   min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: #1a1a1a; /* 与 JS 中的底色一致 */
 }
 
-/* 背景样式 */
-body {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    transition: background-image 0.5s ease;
-}
-
-/* 调整文章区域边距 */
-.container {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-}
-
-/* 优化代码块在毛玻璃上的显示 */
-.highlight {
-  background-color: rgba(0, 0, 0, 0.3) !important;
-}
-
-[data-theme="dark"] .main-content {
-  background: rgba(0, 0, 0, 0.3);
-}
-
-@media (max-width: 767px) {
-  .main-content {
-    backdrop-filter: blur(5px);
-    margin: 10px;
-    padding: 15px;
-  }
-}
-
-/* ===== 全局控制变量 ===== */
+/* 其他毛玻璃样式保持不变 */
 :root {
-  --glass-blur: 12px; /* 主内容模糊度 */
-  --toc-blur: 12px;   /* 目录模糊度 */
-  --mobile-blur: 8px; /* 移动端模糊度 */
+  --glass-blur: 12px;
+  --toc-blur: 12px;
+  --mobile-blur: 8px;
 }
 
-/* ============== 核心毛玻璃效果 ============== */
 #board {
   -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(150%);
   backdrop-filter: blur(var(--glass-blur)) saturate(150%);
@@ -57,12 +23,10 @@ body {
   margin: 15px auto;
 }
 
-/* 暗色模式适配 */
 [data-user-color-scheme='dark'] #board {
   background: rgba(30, 30, 40, 0.4) !important;
 }
 
-/* ============== 目录样式优化 ============== */
 #toc {
   -webkit-backdrop-filter: blur(var(--toc-blur));
   backdrop-filter: blur(var(--toc-blur));
@@ -77,7 +41,6 @@ body {
   background: rgba(40, 40, 55, 0.4) !important;
 }
 
-/* ============== 移动端优化 ============== */
 @media (max-width: 768px) {
   #board {
     --glass-blur: var(--mobile-blur);
@@ -96,176 +59,10 @@ body {
     margin-top: 20px;
     width: 100%;
   }
-  
-  /* 修复移动端键盘弹出问题 */
-  body {
-    background-attachment: scroll !important;
-  }
 }
 
-/* ============== 平板优化 ============== */
-@media (min-width: 769px) and (max-width: 1024px) {
-  #board {
-    max-width: 95%;
-  }
-}
-
-/* ============== 代码块优化 ============== */
 .highlight {
   background: rgba(0, 0, 0, 0.2) !important;
   border-radius: 8px;
   padding: 12px;
-}
-
-/* ============== 背景图全局设置 ============== */
-body {
-  background-size: cover !important;
-  background-attachment: fixed;
-  min-height: 100vh;
-}
-
-/* ============== 修复移动端布局 ============== */
-@media (max-width: 768px) {
-  /* 恢复 Fluid 主题的移动端布局结构 */
-  body, html {
-    height: auto !important;
-    overflow-x: hidden;
-  }
-  
-  #board {
-    display: block !important;
-    margin: 0;
-    padding: 15px 10px;
-    border-radius: 0;
-    min-height: auto;
-  }
-
-  /* 分离首页和文章区 */
-  .index .row {
-    display: block;
-  }
-  
-  .post .row {
-    flex-direction: column;
-  }
-  
-  /* 确保内容区在目录上方 */
-  .post-content {
-    order: 2;
-    margin-top: 20px;
-  }
-  
-  /* 移动端目录样式 */
-  #toc {
-    position: relative !important;
-    top: 0 !important;
-    width: 100% !important;
-    margin-top: 20px;
-    order: 1;
-    max-height: none;
-  }
-  
-  /* 修复首页头图区域 */
-  .banner {
-    height: auto !important;
-    min-height: 40vh;
-  }
-  
-  /* 修复导航栏 */
-  .navbar {
-    position: relative !important;
-  }
-}
-
-/* ============== 修复背景滚动问题 ============== */
-/* 移动端背景解决方案 */
-@media (max-width: 768px) {
-  body {
-    background-attachment: scroll !important;
-    background-size: cover !important;
-    position: relative;
-    overflow-x: hidden;
-  }
-  
-  body::after {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: inherit;
-    background-size: cover;
-    background-position: center;
-    z-index: -1;
-    transform: translateZ(0);
-  }
-}
-
-/* ============== 修复导航栏固定问题 ============== */
-@media (max-width: 768px) {
-  .navbar {
-    position: fixed !important;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    transition: transform 0.3s ease;
-  }
-  
-  /* 内容区域顶部留白 */
-  #board {
-    padding-top: 60px !important;
-  }
-  
-  /* 汉堡菜单样式优化 */
-  .navbar-toggler {
-    position: absolute;
-    right: 15px;
-    top: 15px;
-    z-index: 1001;
-  }
-  
-  /* 菜单展开时全屏覆盖 */
-  .navbar-collapse {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: rgba(17, 253, 222, 0.438);
-    bottom: 0;
-    z-index: 1000;
-    padding: 60px 20px 20px;
-    overflow-y: auto;
-    transform: translateY(-100%);
-    transition: transform 0.3s ease;
-  }
-
-  .navbar-collapse.show {
-    transform: translateY(0);
-  }
-}
-
-/* 桌面端保留固定背景 */
-@media (min-width: 769px) {
-  body {
-    background-attachment: fixed !important;
-  }
-}
-
-/* 加载过渡 */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--board-color);
-  z-index: -1;
-  transition: opacity 1s ease;
-}
-
-body.loaded::before {
-  opacity: 0;
 }
