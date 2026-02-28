@@ -7,7 +7,8 @@ const backgroundAPIs = [
   'https://uapis.cn/api/v1/random/image?category=furry&type=4k',
   'https://uapis.cn/api/v1/random/image?category=furry&type=z4k',
   'https://uapis.cn/api/v1/random/image?category=furry&type=s4k',
-  'https://uapis.cn/api/v1/random/image?category=furry&type=szs8k'
+  'https://uapis.cn/api/v1/random/image?category=furry&type=szs8k',
+  'https://api.furry.ist/furry-img/'
 ];
 
 // ================= 全局变量 =================
