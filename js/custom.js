@@ -6,9 +6,8 @@ const backgroundAPIs = [
   'https://play.pmoze.top:1145/api/image?type=s',
   'https://uapis.cn/api/v1/random/image?category=furry&type=4k',
   'https://uapis.cn/api/v1/random/image?category=furry&type=z4k',
-  'https://uapis.cn/api/v1/random/image?category=furry&type=s4k',
-  'https://uapis.cn/api/v1/random/image?category=furry&type=szs8k',
-  'https://api.furry.ist/furry-img/'
+  'https://api.furry.ist/furry-img/',
+  'https://uapis.cn/api/v1/random/image?category=furry&type=szs8k'
 ];
 
 // ================= 全局变量 =================
@@ -165,3 +164,4 @@ if (window.innerWidth <= 768) {
     }, 200);
   });
 }
+
